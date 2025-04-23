@@ -103,10 +103,10 @@
         data.forEach(person => {
           const row = document.createElement('tr');
           row.innerHTML = `
-            <td>${person.imie}</td>
-            <td>${person.pseudonim}</td>
-            <td>${person.miasto}</td>
-            <td>${person.wiadomosc}</td>
+            <td>${person.name}</td>
+            <td>${person.nickname}</td>
+            <td>${person.city}</td>
+            <td>${person.message}</td>
           `;
           tbody.appendChild(row);
         });
