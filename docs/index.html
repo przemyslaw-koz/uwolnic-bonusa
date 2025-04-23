@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Uwolnić Bonusa!</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+      background-color: #f4f4f4;
+    }
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: #222;
+      color: white;
+      padding: 10px 20px;
+    }
+    button {
+      background-color: #007BFF;
+      border: none;
+      color: white;
+      padding: 10px 20px;
+      cursor: pointer;
+      border-radius: 4px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+      background-color: white;
+    }
+    th, td {
+      padding: 12px;
+      border: 1px solid #ccc;
+      text-align: left;
+    }
+    #modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+    }
+    #modal-content {
+      background: white;
+      margin: 15% auto;
+      padding: 20px;
+      width: 50%;
+      border-radius: 8px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Uwolnić Bonusa!</h1>
+    <button onclick="openModal()">O co chodzi?</button>
+  </header>
+
+  <div id="modal">
+    <div id="modal-content">
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla porta leo in leo laoreet, vitae accumsan tortor sollicitudin.</p>
+      <p>Integer nec velit a mauris tempor dictum. Etiam malesuada bibendum lorem, vitae feugiat neque sodales in.</p>
+      <button onclick="closeModal()">Zamknij</button>
+    </div>
+  </div>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Imię</th>
+        <th>Pseudonim</th>
+        <th>Miasto</th>
+        <th>Wiadomość</th>
+      </tr>
+    </thead>
+    <tbody id="signatures">
+      <!-- Wiersze będą dodawane przez JS -->
+    </tbody>
+  </table>
+
+  <script>
+    function openModal() {
+      document.getElementById('modal').style.display = 'block';
+    }
+
+    function closeModal() {
+      document.getElementById('modal').style.display = 'none';
+    }
+
+    async function loadData() {
+      try {
+        const response = await fetch('https://uwolnic-bonusa.onrender.com/data');
+        const data = await response.json();
+        const tbody = document.getElementById('signatures');
+        tbody.innerHTML = '';
+        data.forEach(person => {
+          const row = document.createElement('tr');
+          row.innerHTML = `
+            <td>${person.imie}</td>
+            <td>${person.pseudonim}</td>
+            <td>${person.miasto}</td>
+            <td>${person.wiadomosc}</td>
+          `;
+          tbody.appendChild(row);
+        });
+      } catch (err) {
+        console.error('Błąd ładowania danych:', err);
+      }
+    }
+
+    window.onload = loadData;
+  </script>
+</body>
+</html>
+
