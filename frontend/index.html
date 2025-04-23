@@ -11,6 +11,7 @@
       padding: 20px;
       background-color: #f4f4f4;
     }
+  
     header {
       display: flex;
       justify-content: space-between;
@@ -19,6 +20,7 @@
       color: white;
       padding: 10px 20px;
     }
+  
     button {
       background-color: #007BFF;
       border: none;
@@ -27,18 +29,22 @@
       cursor: pointer;
       border-radius: 4px;
     }
+  
     table {
       width: 100%;
       border-collapse: collapse;
       margin-top: 20px;
       background-color: white;
     }
+  
     th, td {
       padding: 12px;
       border: 1px solid #ccc;
       text-align: left;
     }
-    #modal {
+  
+    #modal,
+    #formModal {
       display: none;
       position: fixed;
       z-index: 1000;
@@ -48,12 +54,49 @@
       height: 100%;
       background: rgba(0, 0, 0, 0.5);
     }
-    #modal-content {
+  
+    #modal-content,
+    #formModal-content {
       background: white;
-      margin: 15% auto;
-      padding: 20px;
-      width: 50%;
+      margin: 5% auto;
+      padding: 30px;
+      width: 500px;
       border-radius: 8px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    }
+  
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 15px;
+    }
+  
+    .form-group label {
+      margin-bottom: 5px;
+      font-weight: bold;
+    }
+  
+    .form-group input,
+    .form-group textarea {
+      padding: 8px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 14px;
+    }
+  
+    .form-actions {
+      text-align: right;
+    }
+  
+    .form-actions button {
+      width: 100%;
+    }
+  
+    .close-button {
+      float: right;
+      font-size: 20px;
+      font-weight: bold;
+      cursor: pointer;
     }
   </style>
 </head>
@@ -61,6 +104,7 @@
   <header>
     <h1>Uwolnić Bonusa!</h1>
     <button onclick="openModal()">O co chodzi?</button>
+    <button onclick="openFormModal()">Złóż podpis</button>
   </header>
 
   <div id="modal">
@@ -69,6 +113,34 @@
       <p>Integer nec velit a mauris tempor dictum. Etiam malesuada bibendum lorem, vitae feugiat neque sodales in.</p>
       <button onclick="closeModal()">Zamknij</button>
     </div>
+  </div>
+
+  <div id="formModal" class="modal">
+    <div id="formModal-content">
+      <span class="close-button" onclick="closeFormModal()">×</span>
+      <form id="signForm">
+        <div class="form-group">
+          <label for="name">Imię:</label>
+          <input type="text" id="name" name="name">
+        </div>
+        <div class="form-group">
+          <label for="pseudo">Pseudonim:</label>
+          <input type="text" id="pseudo" name="pseudo">
+        </div>
+        <div class="form-group">
+          <label for="city">Miasto:</label>
+          <input type="text" id="city" name="city">
+        </div>
+        <div class="form-group">
+          <label for="message">Wiadomość:</label>
+          <textarea id="message" name="message" rows="4"></textarea>
+        </div>
+        <div class="form-actions">
+          <button type="submit">Wyślij podpis</button>
+        </div>
+      </form>
+    </div>
+
   </div>
 
   <table>
@@ -94,6 +166,14 @@
       document.getElementById('modal').style.display = 'none';
     }
 
+    function openFormModal() {
+      document.getElementById('formModal').style.display = 'block';
+    }
+
+    function closeFormModal() {
+      document.getElementById('formModal').style.display = 'none';
+    }
+
     async function loadData() {
       try {
         const response = await fetch('https://uwolnic-bonusa.onrender.com/data');
@@ -105,7 +185,7 @@
           row.innerHTML = `
             <td>${person.name}</td>
             <td>${person.nickname}</td>
-            <td>${person.city}</td>
+            <td>${person.city}</td>S
             <td>${person.message}</td>
           `;
           tbody.appendChild(row);
@@ -114,6 +194,27 @@
         console.error('Błąd ładowania danych:', err);
       }
     }
+
+    document.getElementById("signForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+      const formData = new FormData(this);
+      const payload = Object.fromEntries(formData.entries());
+
+      fetch("https://uwolnic-bonusa.onrender.com/sign", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload)
+      })
+      .then(res => {
+        if (res.ok) {
+          closeFormModal();
+          alert("Dzięki za podpis!");
+          location.reload(); // Odśwież dane
+        } else {
+          alert("Błąd przy wysyłaniu podpisu.");
+        }
+      });
+    });
 
     window.onload = loadData;
   </script>
