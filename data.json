@@ -1,12 +1,128 @@
 [
   {
+    "name": "piotr",
     "nickname": "bonus",
+    "city": "poznań",
     "message": "uwolnijcie mnie!"
   },
   {
-    "name": "piotr",
-    "nickname": "bonus",
-    "city": "pozna\u0144",
-    "message": "uwolnijcie mnie!"
+    "name": "kacper",
+    "nickname": "dziki",
+    "city": "łódź",
+    "message": "trzymaj się bonus, nie pękaj!"
+  },
+  {
+    "name": "dawid",
+    "nickname": "szefu",
+    "city": "warszawa",
+    "message": "pozdrowienia do więzienia!"
+  },
+  {
+    "name": "patryk",
+    "nickname": "krulu",
+    "city": "szczecin",
+    "message": "bonus, czekamy na ciebie pod klatką!"
+  },
+  {
+    "name": "adrian",
+    "nickname": "żelo",
+    "city": "wrocław",
+    "message": "bonus wracaj na rejon!"
+  },
+  {
+    "name": "karol",
+    "nickname": "sznycel",
+    "city": "bydgoszcz",
+    "message": "wolność dla bonusa!"
+  },
+  {
+    "name": "damian",
+    "nickname": "młody wilk",
+    "city": "radom",
+    "message": "czekamy na ciebie, ziomuś!"
+  },
+  {
+    "name": "mateusz",
+    "nickname": "kostek",
+    "city": "zabrze",
+    "message": "bonus, siła i honor!"
+  },
+  {
+    "name": "sebastian",
+    "nickname": "biniu",
+    "city": "katowice",
+    "message": "trzym się mordeczko!"
+  },
+  {
+    "name": "aleksander",
+    "nickname": "loko",
+    "city": "gdańsk",
+    "message": "piona zza krat!"
+  },
+  {
+    "name": "tomasz",
+    "nickname": "cygan",
+    "city": "sosnowiec",
+    "message": "wracaj szybko, bracie!"
+  },
+  {
+    "name": "marcin",
+    "nickname": "kapek",
+    "city": "białystok",
+    "message": "wolność jest najważniejsza!"
+  },
+  {
+    "name": "krystian",
+    "nickname": "ryju",
+    "city": "kielce",
+    "message": "bonus, nie daj się systemowi!"
+  },
+  {
+    "name": "paweł",
+    "nickname": "japcok",
+    "city": "toruń",
+    "message": "pozdrówki zza betonu!"
+  },
+  {
+    "name": "arek",
+    "nickname": "byku",
+    "city": "elbląg",
+    "message": "szacunek i lojalność!"
+  },
+  {
+    "name": "bartek",
+    "nickname": "kutan",
+    "city": "gliwice",
+    "message": "do zobaczenia na osiedlu!"
+  },
+  {
+    "name": "wojciech",
+    "nickname": "dzbanek",
+    "city": "legionowo",
+    "message": "bonus, wracaj do gry!"
+  },
+  {
+    "name": "konrad",
+    "nickname": "wariat",
+    "city": "tarnów",
+    "message": "pamiętamy, bracie!"
+  },
+  {
+    "name": "grzegorz",
+    "nickname": "szpryca",
+    "city": "krosno",
+    "message": "zawsze lojalni!"
+  },
+  {
+    "name": "igor",
+    "nickname": "koksu",
+    "city": "żyrardów",
+    "message": "bonus, niedługo wolność!"
+  },
+  {
+    "name": "jakub",
+    "nickname": "gumiś",
+    "city": "pruszków",
+    "message": "szacunek ulicy!"
   }
 ]
