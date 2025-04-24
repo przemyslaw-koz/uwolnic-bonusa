@@ -22,17 +22,32 @@ class Sign(db.Model):
 
 
 def create_tables_and_seed():
-    with app.app_context():  # PUSH context
+    with app.app_context():
         db.create_all()
-        if Sign.query.count() == 0:
-            sample = Sign(
-                name="Piotr",
-                nickname="Bonus BGC",
-                city="Łazarski",
-                message="Uwolnijcie mnie natychmiast!",
-            )
-            db.session.add(sample)
-            db.session.commit()
+        if Sign.query.count() == 1:
+            try:
+                with open("data.json", "r", encoding="utf-8") as f:
+                    data = json.load(f)
+                    for item in data:
+                        sign = Sign(
+                            name=item["name"],
+                            nickname=item["nickname"],
+                            city=item["city"],
+                            message=item["message"],
+                        )
+                        db.session.add(sign)
+                    db.session.commit()
+                print("Dane z data.json zostały załadowane do bazy danych.")
+            except FileNotFoundError:
+                print("Plik data.json nie został znaleziony.  Dodaję puste dane.")
+                sample = Sign(
+                    name="Piotr",
+                    nickname="Bonus BGC",
+                    city="Łazarski",
+                    message="Uwolnijcie mnie natychmiast!",
+                )
+                db.session.add(sample)
+                db.session.commit()
 
 
 @app.route("/data", methods=["GET"])
