@@ -1,14 +1,14 @@
 import json
 import os
-from logging import debug
 
 from flask import Flask, jsonify, request
 from flask_cors import CORS
 from flask_sqlalchemy import SQLAlchemy
-from sqlalchemy.util import ScopedRegistry
 
 app = Flask(__name__)
 app.config["SQLALCHEMY_DATABASE_URI"] = os.environ.get("DATABASE_URL")
+app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
+
 db = SQLAlchemy(app)
 CORS(app)
 
@@ -19,6 +19,20 @@ class Sign(db.Model):
     message = db.Column(db.String, nullable=False)
     nickname = db.Column(db.String, nullable=False)
     city = db.Column(db.String, nullable=False)
+
+	
+@app.before_first_request
+def create_tables_and_seed():
+    db.create_all()
+    if Sign.query.count() == 0:
+        sample = Sign(
+            name="Piotr",
+            nickname="Bonus BGC",
+            city="Łazarski",
+            message="Uwolnijcie mnie natychmiast!",
+        )
+        db.session.add(sample)
+        db.session.commit()
 
 
 @app.route("/data", methods=["GET"])
