@@ -4,40 +4,50 @@ from logging import debug
 
 from flask import Flask, jsonify, request
 from flask_cors import CORS
+from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy.util import ScopedRegistry
 
 app = Flask(__name__)
+app.config["SQLALCHEMY_DATABASE_URI"] = os.environ.get("DATABASE_URL")
+db = SQLAlchemy(app)
 CORS(app)
 
-DATA_FILE = "data.json"
 
-
-def load_data():
-    if not os.path.exists(DATA_FILE):
-        return []
-    with open(DATA_FILE, "r") as f:
-        try:
-            return json.load(f)
-        except json.JSONDecodeError:
-            return []
-
-
-def save_data(new_item):
-    data = load_data()
-    data.append(new_item)
-    with open(DATA_FILE, "w") as f:
-        json.dump(data, f, indent=2)
+class Sign(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String, nullable=False)
+    message = db.Column(db.String, nullable=False)
+    nickname = db.Column(db.String, nullable=False)
+    city = db.Column(db.String, nullable=False)
 
 
 @app.route("/data", methods=["GET"])
 def get_data():
-    data = load_data()
-    return jsonify(data)
+    data = Sign.query.all()
+    return jsonify(
+        [
+            {
+                "name": s.name,
+                "nickname": s.nickname,
+                "city": s.city,
+                "message": s.message,
+            }
+            for s in data
+        ]
+    )
 
 
 @app.route("/sign", methods=["POST"])
 def sign():
-    new_sign = request.get_json()
-    save_data(new_sign)
+    data = request.get_json()
+    new_sign = Sign()
+    new_sign.name = data["name"]
+    new_sign.nickname = data["nickname"]
+    new_sign.city = data["city"]
+    new_sign.message = data["message"]
+
+    db.session.add(new_sign)
+    db.session.commit()
     return jsonify({"message": "New sign added"}), 200
 
 
