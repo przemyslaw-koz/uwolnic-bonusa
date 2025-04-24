@@ -1,223 +1,299 @@
 <!DOCTYPE html>
 <html lang="pl">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Uwolnić Bonusa!</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 20px;
-      background-color: #f4f4f4;
-    }
-  
-    header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      background-color: #222;
-      color: white;
-      padding: 10px 20px;
-    }
-  
-    button {
-      background-color: #007BFF;
-      border: none;
-      color: white;
-      padding: 10px 20px;
-      cursor: pointer;
-      border-radius: 4px;
-    }
-  
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 20px;
-      background-color: white;
-    }
-  
-    th, td {
-      padding: 12px;
-      border: 1px solid #ccc;
-      text-align: left;
-    }
-  
-    #modal,
-    #formModal {
-      display: none;
-      position: fixed;
-      z-index: 1000;
-      left: 0;
-      top: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.5);
-    }
-  
-    #modal-content,
-    #formModal-content {
-      background: white;
-      margin: 5% auto;
-      padding: 30px;
-      width: 500px;
-      border-radius: 8px;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-    }
-  
-    .form-group {
-      display: flex;
-      flex-direction: column;
-      margin-bottom: 15px;
-    }
-  
-    .form-group label {
-      margin-bottom: 5px;
-      font-weight: bold;
-    }
-  
-    .form-group input,
-    .form-group textarea {
-      padding: 8px;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-      font-size: 14px;
-    }
-  
-    .form-actions {
-      text-align: right;
-    }
-  
-    .form-actions button {
-      width: 100%;
-    }
-  
-    .close-button {
-      float: right;
-      font-size: 20px;
-      font-weight: bold;
-      cursor: pointer;
-    }
-  </style>
-</head>
-<body>
-  <header>
-    <h1>Uwolnić Bonusa!</h1>
-    <button onclick="openModal()">O co chodzi?</button>
-    <button onclick="openFormModal()">Złóż podpis</button>
-  </header>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Uwolnić Bonusa!</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 20px;
+        background-color: #f4f4f4;
+      }
 
-  <div id="modal">
-    <div id="modal-content">
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla porta leo in leo laoreet, vitae accumsan tortor sollicitudin.</p>
-      <p>Integer nec velit a mauris tempor dictum. Etiam malesuada bibendum lorem, vitae feugiat neque sodales in.</p>
-      <button onclick="closeModal()">Zamknij</button>
+      header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: #222;
+        color: white;
+        padding: 10px 20px;
+      }
+
+      button {
+        background-color: #007bff;
+        border: none;
+        color: white;
+        padding: 10px 20px;
+        cursor: pointer;
+        border-radius: 4px;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+        background-color: white;
+      }
+
+      th,
+      td {
+        padding: 12px;
+        border: 1px solid #ccc;
+        text-align: left;
+      }
+
+      #modal,
+      #formModal {
+        display: none;
+        position: fixed;
+        z-index: 1000;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+      }
+
+      #modal-content,
+      #formModal-content {
+        background: white;
+        margin: 5% auto;
+        padding: 30px;
+        width: 500px;
+        border-radius: 8px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+      }
+
+      .form-group {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 15px;
+      }
+
+      .form-group label {
+        margin-bottom: 5px;
+        font-weight: bold;
+      }
+
+      .form-group input,
+      .form-group textarea {
+        padding: 8px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        font-size: 14px;
+      }
+
+      .form-actions {
+        text-align: right;
+      }
+
+      .form-actions button {
+        width: 100%;
+      }
+
+      .close-button {
+        float: right;
+        font-size: 20px;
+        font-weight: bold;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>Uwolnić Bonusa!</h1>
+      <button onclick="openModal()">O co chodzi?</button>
+      <button onclick="openFormModal()">Złóż podpis</button>
+    </header>
+
+    <div id="modal">
+      <div id="modal-content">
+        <h2>
+          Petycja o ułaskawienie Piotra Witczaka, dalej zwanego Bonusem BGC
+        </h2>
+        <h3>złożona w duchu troski narodowej oraz dobra wspólnego</h3>
+
+        <p>Szanowny Panie Prezydencie Rzeczypospolitej Polskiej,</p>
+
+        <p>
+          Zwracamy się z niniejszą petycją, kierując się najwyższym poczuciem
+          obywatelskiego obowiązku oraz braterską solidarnością z człowiekiem,
+          który dał temu krajowi więcej niż niejeden polityk – Piotrem, dalej
+          zwanym Bonusem BGC, który to aktualnie
+          <strong>garuje w Choroszczy za niewinność</strong>, jakby freestyle
+          był przestępstwem, a <em>"luj ogłuszacz"</em> zagrożeniem dla
+          demokracji.
+        </p>
+
+        <p>
+          Niech Pan spojrzy na fakty, Panie Prezydencie:<br />
+          Cała Polska żyje tą sprawą. Od Gdyni po Zakopane, od Białegostoku po
+          Zgorzelec – wszyscy pytają jedno:
+          <strong>“Kiedy Bonus wróci na rejon?”</strong> Bo to nie jest zwykły
+          chłop – to jest instytucja, to jest
+          <em>Narodowy Instytut Ulicznej Prawdy</em>.
+        </p>
+
+        <p>
+          Jego <em>"luj ogłuszacz"</em> to nie był zwykły cios, to był
+          symbol!<br />
+          Symbol tego, że nawet jak życie cię przyciśnie, to możesz oddać
+          sercem.<br />
+          Symbol tego, że prawda boli – i to tak, że aż przeciwnik pada na dechy
+          jak po rachunku za gaz.
+        </p>
+
+        <p>
+          Świat MMA od jego zniknięcia <strong>popadł w marazm</strong>. Walki
+          są nijakie, zawodnicy smutni, a oktagon nie słyszał od dawna hasła:
+        </p>
+
+        <blockquote>
+          <strong>„Jest dobrze w chuj!”</strong><br />
+          <small
+            >(A przecież to zdanie powinno trafić do Preambuły
+            Konstytucji!)</small
+          >
+        </blockquote>
+
+        <p>
+          Dzielnice milczą. Klatki schodowe, kiedyś wypełnione echem jego
+          wersów, teraz brzmią pustką i odgłosem kuriera z paczkomatu.<br />
+          Nawet dzieci przestały kopać w piłkę – bo nie mają autorytetu, który
+          by im powiedział:
+        </p>
+
+        <blockquote>
+          <em>„Lecimy tutaj!”</em>
+        </blockquote>
+
+        <p>Bonus to przecież <strong>dobra mordeczka</strong>.</p>
+
+        <p>
+          Szanowny Panie Prezydencie, apelujemy z głębi serc:<br />
+          Niech Pan użyje swojego majestatu, swojej władzy – i tego długopisu,
+          co podobno ma specjalną szufladkę na indykty.<br />
+          Niech Pan sprawi, że Bonus
+          <strong>wyjdzie z Choroszczy na wolność</strong>, gdzie jego miejsce –
+          czyli <em>rejon</em>!
+        </p>
+
+        <p>Bo parafrazując jego słowa:</p>
+
+        <blockquote>
+          <strong>„Na Choroszczańskim rejonie nie jest kolorowo.”</strong>
+        </blockquote>
+
+        <button onclick="closeModal()">Zamknij</button>
+      </div>
     </div>
-  </div>
 
-  <div id="formModal" class="modal">
-    <div id="formModal-content">
-      <span class="close-button" onclick="closeFormModal()">×</span>
-      <form id="signForm">
-        <div class="form-group">
-          <label for="name">Imię:</label>
-          <input type="text" id="name" name="name">
-        </div>
-        <div class="form-group">
-          <label for="nickname">Pseudonim:</label>
-          <input type="text" id="nickname" name="nickname">
-        </div>
-        <div class="form-group">
-          <label for="city">Miasto:</label>
-          <input type="text" id="city" name="city">
-        </div>
-        <div class="form-group">
-          <label for="message">Wiadomość:</label>
-          <textarea id="message" name="message" rows="4"></textarea>
-        </div>
-        <div class="form-actions">
-          <button type="submit">Wyślij podpis</button>
-        </div>
-      </form>
+    <div id="formModal" class="modal">
+      <div id="formModal-content">
+        <span class="close-button" onclick="closeFormModal()">×</span>
+        <form id="signForm">
+          <div class="form-group">
+            <label for="name">Imię:</label>
+            <input type="text" id="name" name="name" />
+          </div>
+          <div class="form-group">
+            <label for="nickname">Pseudonim:</label>
+            <input type="text" id="nickname" name="nickname" />
+          </div>
+          <div class="form-group">
+            <label for="city">Miasto:</label>
+            <input type="text" id="city" name="city" />
+          </div>
+          <div class="form-group">
+            <label for="message">Wiadomość:</label>
+            <textarea id="message" name="message" rows="4"></textarea>
+          </div>
+          <div class="form-actions">
+            <button type="submit">Wyślij podpis</button>
+          </div>
+        </form>
+      </div>
     </div>
 
-  </div>
+    <table>
+      <thead>
+        <tr>
+          <th>Imię</th>
+          <th>Pseudonim</th>
+          <th>Miasto</th>
+          <th>Wiadomość</th>
+        </tr>
+      </thead>
+      <tbody id="signatures">
+        <!-- Wiersze będą dodawane przez JS -->
+      </tbody>
+    </table>
 
-  <table>
-    <thead>
-      <tr>
-        <th>Imię</th>
-        <th>Pseudonim</th>
-        <th>Miasto</th>
-        <th>Wiadomość</th>
-      </tr>
-    </thead>
-    <tbody id="signatures">
-      <!-- Wiersze będą dodawane przez JS -->
-    </tbody>
-  </table>
+    <script>
+      function openModal() {
+        document.getElementById("modal").style.display = "block";
+      }
 
-  <script>
-    function openModal() {
-      document.getElementById('modal').style.display = 'block';
-    }
+      function closeModal() {
+        document.getElementById("modal").style.display = "none";
+      }
 
-    function closeModal() {
-      document.getElementById('modal').style.display = 'none';
-    }
+      function openFormModal() {
+        document.getElementById("formModal").style.display = "block";
+      }
 
-    function openFormModal() {
-      document.getElementById('formModal').style.display = 'block';
-    }
+      function closeFormModal() {
+        document.getElementById("formModal").style.display = "none";
+      }
 
-    function closeFormModal() {
-      document.getElementById('formModal').style.display = 'none';
-    }
-
-    async function loadData() {
-      try {
-        const response = await fetch('https://uwolnic-bonusa.onrender.com/data');
-        const data = await response.json();
-        const tbody = document.getElementById('signatures');
-        tbody.innerHTML = '';
-        data.forEach(person => {
-          const row = document.createElement('tr');
-          row.innerHTML = `
+      async function loadData() {
+        try {
+          const response = await fetch(
+            "https://uwolnic-bonusa.onrender.com/data"
+          );
+          const data = await response.json();
+          const tbody = document.getElementById("signatures");
+          tbody.innerHTML = "";
+          data.forEach((person) => {
+            const row = document.createElement("tr");
+            row.innerHTML = `
             <td>${person.name}</td>
             <td>${person.nickname}</td>
             <td>${person.city}</td>
             <td>${person.message}</td>
           `;
-          tbody.appendChild(row);
-        });
-      } catch (err) {
-        console.error('Błąd ładowania danych:', err);
-      }
-    }
-
-    document.getElementById("signForm").addEventListener("submit", function(e) {
-      e.preventDefault();
-      const formData = new FormData(this);
-      const payload = Object.fromEntries(formData.entries());
-
-      fetch("https://uwolnic-bonusa.onrender.com/sign", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload)
-      })
-      .then(res => {
-        if (res.ok) {
-          closeFormModal();
-          alert("Dzięki za podpis!");
-          location.reload(); // Odśwież dane
-        } else {
-          alert("Błąd przy wysyłaniu podpisu.");
+            tbody.appendChild(row);
+          });
+        } catch (err) {
+          console.error("Błąd ładowania danych:", err);
         }
-      });
-    });
+      }
 
-    window.onload = loadData;
-  </script>
-</body>
+      document
+        .getElementById("signForm")
+        .addEventListener("submit", function (e) {
+          e.preventDefault();
+          const formData = new FormData(this);
+          const payload = Object.fromEntries(formData.entries());
+
+          fetch("https://uwolnic-bonusa.onrender.com/sign", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(payload),
+          }).then((res) => {
+            if (res.ok) {
+              closeFormModal();
+              alert("Dzięki za podpis!");
+              location.reload(); // Odśwież dane
+            } else {
+              alert("Błąd przy wysyłaniu podpisu.");
+            }
+          });
+        });
+
+      window.onload = loadData;
+    </script>
+  </body>
 </html>
-
