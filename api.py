@@ -20,19 +20,19 @@ class Sign(db.Model):
     nickname = db.Column(db.String, nullable=False)
     city = db.Column(db.String, nullable=False)
 
-	
-@app.before_first_request
+
 def create_tables_and_seed():
-    db.create_all()
-    if Sign.query.count() == 0:
-        sample = Sign(
-            name="Piotr",
-            nickname="Bonus BGC",
-            city="Łazarski",
-            message="Uwolnijcie mnie natychmiast!",
-        )
-        db.session.add(sample)
-        db.session.commit()
+    with app.app_context():  # PUSH context
+        db.create_all()
+        if Sign.query.count() == 0:
+            sample = Sign(
+                name="Piotr",
+                nickname="Bonus BGC",
+                city="Łazarski",
+                message="Uwolnijcie mnie natychmiast!",
+            )
+            db.session.add(sample)
+            db.session.commit()
 
 
 @app.route("/data", methods=["GET"])
@@ -71,5 +71,6 @@ def root():
 
 
 if __name__ == "__main__":
+    create_tables_and_seed()
     port = int(os.environ.get("PORT", 5000))
     app.run(host="0.0.0.0", port=port, debug=True)
